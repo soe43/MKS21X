@@ -6,3 +6,8 @@ ssh-keygen
 commit
 config
 add
+heh
+hehe
+hehe xd
+repo's are pretty nice
+
