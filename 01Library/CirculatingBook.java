@@ -2,8 +2,8 @@ public class CirculatingBook extends LibraryBook{
     private String currentHolder;
     private String dueDate;
 
-    public CirculatingBook(String title,String author,String isbn,String callNumber){
-	super(title,author,isbn,callNumber);
+    public CirculatingBook(String author,String title,String isbn,String callNumber){
+	super(author,title,isbn,callNumber);
 	currentHolder = null;
 	dueDate = null;
 }
