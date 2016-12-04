@@ -4,6 +4,11 @@ public class SuperArray implements Iterable<String>{
     private String[] data;
     private int size;
 
+    public SuperArray(){
+	data = new String[10];
+	size = 0;
+    }
+    
     public SuperArray(int capacity){
 	if(capacity < 0){
 	    throw new IllegalArgumentException();
@@ -14,12 +19,17 @@ public class SuperArray implements Iterable<String>{
 
     public Iterator<String> iterator(){
 	SuperArrayIterator It = new SuperArrayIterator();
+	return It;
     }
 
     public int size(){
 	return size;
     }
 
+    public String[] data(){
+	return data;
+    }
+    
     public boolean add(String n){
 	if(size + 1 > data.length){
 	    this.grow();
