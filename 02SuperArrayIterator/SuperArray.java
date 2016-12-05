@@ -18,8 +18,7 @@ public class SuperArray implements Iterable<String>{
     }
 
     public Iterator<String> iterator(){
-	SuperArrayIterator It = new SuperArrayIterator();
-	return It;
+	return new SuperArrayItertor(this);
     }
 
     public int size(){
