@@ -33,7 +33,53 @@ public class Barcode implements Comparable<Barcode>{
 	}
 	return ans;
     }
-	    
+
+    public int toZip(String barcode){
+	if(barcode.length() != 32){
+	    throw new IllegalArgumentException();
+	}
+	if(barcode.charAt(0) != '|' || barcode.charAt(31) != '|'){
+	    throw new IllegalArgumentException();
+	}
+	int place = 6;
+	int ans = 0;
+	String switcher = "";
+	for(int i = 1;i < barcode.length() - 2;i = i + 3){
+	    switcher = barcode.substring(i,i+3);
+	    switch (switcher){
+	    case "||:::": break;
+	    case ":::||": ans += 1*place;
+		place--;
+		break;
+	    case "::|:|": ans += 2*place;
+		place--;
+		break;
+	    case "::||:": ans += 3*place;
+		place--;
+		break;
+	    case ":|::|": ans += 4*place;
+		place--;
+		break;
+	    case ":|:|:": ans += 5*place;
+		place--;
+		break;
+	    case ":||::": ans += 6*place;
+		place--;
+		break;
+	    case "|:::|": ans += 7*place;
+		place--;
+		break;
+	    case "|::|:": ans += 8*place;
+		place--;
+		break;
+	    case "|:|::": ans += 9*place;
+		place--;
+		break;
+	    }
+	}
+	return ans;
+    }
+    
     public int compareTo(Barcode other){
 	int ans = 0;
 	for(int i = 0; i < 5;i++){
