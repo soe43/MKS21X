@@ -5,6 +5,7 @@ public class Barcode implements Comparable<Barcode>{
     private int _checkDigit;
     private String addScheme;
     private int scheme;
+    private static final String[] bars = {"||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::","|:::|","|::|:","|:|::"};
 
     public Barcode(String zip){
 	for(int i = 0;i < zip.length();i++){
@@ -13,7 +14,7 @@ public class Barcode implements Comparable<Barcode>{
 	    }
 	}
 	if(zip.length() != 5){
-	    throw new IllegalArgumentException();
+	    throw new IllegalArgumentException("Zip not right size!");
 	}	
 	else{
 	    _zip = zip;
@@ -34,46 +35,93 @@ public class Barcode implements Comparable<Barcode>{
 	return ans;
     }
 
-    public int toZip(String barcode){
+    private static int checkSum(String checked){
+	int ans = 0;
+	for(int k = 0;k < checked.length();k++){
+	    ans += (int)checked.charAt(k);
+	}
+	return ans;
+    }
+
+    public static String toCode(String zip){
+	if(zip.length() != 5){
+	    throw new IllegalArgumentException("Zip not right length!");
+	}
+	for(int i = 0;i < zip.length();i++){
+	    if(!Character.isDigit((zip.charAt(i)))){
+		throw new IllegalArgumentException("Contains a non-Digit!");
+	    }
+	}
+	int checkDigit = checkSum(zip) % 10;
+	zip += checkDigit;
+	String hold = "|";
+	for(int i = 0;i < zip.length();i++){
+	    int schemer = (int)zip.charAt(i);
+	    switch (schemer){
+	    case 1: hold +=  ":::||";
+		break;
+	    case 2: hold += "::|:|";
+		break;
+	    case 3: hold += "::||:";
+		break;
+	    case 4: hold += ":|::|";
+		break;
+	    case 5: hold += ":|:|:";
+		break;
+	    case 6: hold += ":||::";
+		break;
+	    case 7: hold += "|:::|";
+		break;
+	    case 8: hold += "|::|:";
+		break;
+	    case 9: hold += "|:|::";
+		break;
+	    case 0: hold += "||:::";
+	    }
+	}
+	return hold;
+    }
+	
+
+    public static String toZip(String barcode){
 	if(barcode.length() != 32){
-	    throw new IllegalArgumentException();
+	    throw new IllegalArgumentException("Barcode is not correct size!");
 	}
 	if(barcode.charAt(0) != '|' || barcode.charAt(31) != '|'){
-	    throw new IllegalArgumentException();
+	    throw new IllegalArgumentException("Barcode missing front and end bars!");
 	}
-	int place = 6;
-	int ans = 0;
+	for(int i = 0;i < barcode.length();i++){
+	    if(barcode.charAt(i) != ':' || barcode.charAt(i) != '|'){
+		throw new IllegalArgumentException("Barcode contains non-barcode characters!");
+	    }
+	}
+	String ans = "";
 	String switcher = "";
-	for(int i = 1;i < barcode.length() - 2;i = i + 3){
+	for(int i = 1;i < barcode.length() - 5;i = i + 3){
 	    switcher = barcode.substring(i,i+3);
+	    if(!Arrays.asList(bars).contains(switcher)){
+		throw new IllegalArgumentException("A part of your barcode is unrecognized!");
+	    }
 	    switch (switcher){
-	    case "||:::": break;
-	    case ":::||": ans += 1*place;
-		place--;
+	    case "||:::": 
 		break;
-	    case "::|:|": ans += 2*place;
-		place--;
+	    case ":::||": ans += 1;
 		break;
-	    case "::||:": ans += 3*place;
-		place--;
+	    case "::|:|": ans += 2;
 		break;
-	    case ":|::|": ans += 4*place;
-		place--;
+	    case "::||:": ans += 3;
 		break;
-	    case ":|:|:": ans += 5*place;
-		place--;
+	    case ":|::|": ans += 4;
 		break;
-	    case ":||::": ans += 6*place;
-		place--;
+	    case ":|:|:": ans += 5;
 		break;
-	    case "|:::|": ans += 7*place;
-		place--;
+	    case ":||::": ans += 6;
 		break;
-	    case "|::|:": ans += 8*place;
-		place--;
+	    case "|:::|": ans += 7;
 		break;
-	    case "|:|::": ans += 9*place;
-		place--;
+	    case "|::|:": ans += 8;
+		break;
+	    case "|:|::": ans += 9;
 		break;
 	    }
 	}
@@ -106,7 +154,7 @@ public class Barcode implements Comparable<Barcode>{
     }
 
     public String toString(){
-	String hold = _zip + "|";
+	String hold = _zip+_checkDigit+"|";
 	for(int i = 0;i < _zip.length();i++){
 	    scheme = (int)_zip.charAt(i);
 	    switch (scheme){
