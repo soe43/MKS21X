@@ -56,7 +56,7 @@ public class Barcode implements Comparable<Barcode>{
 	zip += checkDigit;
 	String hold = "|";
 	for(int i = 0;i < zip.length();i++){
-	    int schemer = (int)zip.charAt(i);
+	    int schemer = (int)zip.charAt(i) - 48;
 	    switch (schemer){
 	    case 1: hold +=  ":::||";
 		break;
@@ -154,9 +154,9 @@ public class Barcode implements Comparable<Barcode>{
     }
 
     public String toString(){
-	String hold = _zip+_checkDigit+"|";
+	String hold = _zip+_checkDigit+" |";
 	for(int i = 0;i < _zip.length();i++){
-	    scheme = (int)_zip.charAt(i);
+	    scheme = (int)_zip.charAt(i)-48;
 	    switch (scheme){
 	    case 1: addScheme =  ":::||";
 		break;
@@ -186,8 +186,8 @@ public class Barcode implements Comparable<Barcode>{
 
     public static void main(String[]args){
 	Barcode a = new Barcode("97030");
-	Barcode b = new Barcode("97031");
-	Barcode c = new Barcode("03714");
-	Barcode d = new Barcode("0");
+	System.out.println(a.toString());
+	System.out.println(toCode("14679"));
+	System.out.println(toZip("|:::||:::||:::||:::||:::||:|:|:|"));
     }
 }
