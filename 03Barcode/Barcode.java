@@ -90,15 +90,15 @@ public class Barcode implements Comparable<Barcode>{
 	if(barcode.charAt(0) != '|' || barcode.charAt(31) != '|'){
 	    throw new IllegalArgumentException("Barcode missing front and end bars!");
 	}
-	for(int i = 0;i < barcode.length();i++){
-	    if(barcode.charAt(i) != ':' || barcode.charAt(i) != '|'){
+	for(int i = 1;i < barcode.length();i++){
+	    if(barcode.charAt(i) != ':' && barcode.charAt(i) != '|'){
 		throw new IllegalArgumentException("Barcode contains non-barcode characters!");
 	    }
 	}
 	String ans = "";
 	String switcher = "";
-	for(int i = 1;i < barcode.length() - 5;i = i + 3){
-	    switcher = barcode.substring(i,i+3);
+	for(int i = 1;i < barcode.length() - 4;i = i + 2){
+	    switcher = barcode.substring(i,i+2);
 	    if(!Arrays.asList(bars).contains(switcher)){
 		throw new IllegalArgumentException("A part of your barcode is unrecognized!");
 	    }
