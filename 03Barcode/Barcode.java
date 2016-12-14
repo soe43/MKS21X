@@ -97,9 +97,11 @@ public class Barcode implements Comparable<Barcode>{
 	}
 	String ans = "";
 	String switcher = "";
-	for(int i = 1;i < barcode.length() - 4;i = i + 2){
-	    switcher = barcode.substring(i,i+2);
-	    if(!Arrays.asList(bars).contains(switcher)){
+	barcode = barcode.substring(1);
+	barcode = barcode.substring(0,30);
+	for(int i = 0;i < barcode.length() - 8;i = i + 5){
+	    switcher = barcode.substring(i,i+5);
+	    if(!(Arrays.asList(bars)).contains(switcher)){
 		throw new IllegalArgumentException("A part of your barcode is unrecognized!");
 	    }
 	    switch (switcher){

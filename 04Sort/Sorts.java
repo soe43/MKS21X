@@ -11,19 +11,21 @@ public class Sorts{
      *@param data  the elements to be sorted.
      */
     public static void selectionSort(int[] data){  
-	int least = data[0];
-	for(int nextSlot = 0;nextSlot < data.length - 1;nextSlot++){
-	for(int compare = 1;compare < data.length - 1;compare++){
-	    if(data[i] < least){
-	        least = data[i];
-	    }
-	    if(i = data.length){
+	for (int i = 0; i < data.length - 1; i++)
+        {
+            int index = i;
+            for (int j = i + 1; j < data.length; j++)
+                if (data[j] < data[index])
+                    index = j;
 		
-	    }
-	}
+	       
+            int smallerNumber = data[index]; 
+            data[index] = data[i];
+            data[i] = smallerNumber;
+        }
     }
 		
-    }
+    
 
     public static void main(String[]args){
 	int[] yo = new int[] {64, 25, 12, 22, 11};
