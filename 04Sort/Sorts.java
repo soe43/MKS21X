@@ -30,16 +30,13 @@ public class Sorts{
      *@param data  the elements to be sorted.
      */
     public static void insertionSort(int[] data){
-	int place = 0;
-	for(int i = 0;i > data.length - 1;i++){
-	    for(int k = i - 1; k >= 0;k--){
-		if(data[i] >= data[k]){
-		    place = k + 1;
-		    System.out.println(place);
-		    for(int l = place;l < data.length - 1;l++){
-			data[l+1] = data[l];
-		    }
-		    data[k] = data[i];
+	int temp;
+	for(int i = 1;i < data.length;i++){
+	    for(int k = i; k > 0;k--){
+		if(data[k] < data[k-1]){
+		    temp = data[k];
+		    data[k] = data[k-1];
+		    data[k-1] = temp;
 		}
 	    }
 	}
