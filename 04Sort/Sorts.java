@@ -1,7 +1,6 @@
 import java.util.Arrays;
 public class Sorts{
-    /**EDIT THIS METHOD TO MATCH YOUR NAME 
-     */
+  
     public static String name(){
 	return "06.Soe.William"; 
     }
@@ -47,23 +46,16 @@ public class Sorts{
      *@param data  the elements to be sorted.
      */
     public static void bubbleSort(int[] data){
-	
-
-	for(int i = 0; i < data.length-1;i++){
-	    int counter = 0;
-	    if(data[i] > data[i+1]){
-		counter++;
-		int temp = data[i];
-		data[i] = data[i+1];
-		data[i+1] = temp;
+	int temp;
+	for(int i = 0; i < data.length;i++){
+	    for(int k = 1;k < data.length - i;k++){
+		if (data[k-1] > data[k]){
+		    temp = data[k-1];
+		    data[k-1] = data[k];
+		    data[k] = temp;
+		}
 	    }
 	}
-	    if(counter == 0){
-		return;
-	    }
-	    else{
-		counter = 0;
-	    }
     }
 
     public static void main(String[]args){
