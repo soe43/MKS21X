@@ -9,12 +9,12 @@ public class TempConverter extends JFrame implements ActionListener{
     
     public TempConverter() {
 	this.setTitle("Temp Converter");
-	this.setSize(600,400);
-	this.setLocation(100,100);
+	this.setSize(800,100);
+	this.setLocation(200,200);
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
 	pane = this.getContentPane();
-	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+	pane.setLayout(new FlowLayout());
 	JButton b = new JButton("FtoC");
 	b.addActionListener(this);
 	b.setActionCommand("C");
@@ -36,11 +36,11 @@ public class TempConverter extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
 	if(event.equals("F")){
-	    String s = "" + cToF(Integer.parseInt(t.getText()));
+	    String s = "" + cToF(Integer.parseInt(t.getText()))+" Degrees Fahrenheit";
 	    j3.setText(s);
 	}
 	if(event.equals("C")){
-	    String s = "" + fToC(Integer.parseInt(t.getText()));
+	    String s = "" + fToC(Integer.parseInt(t.getText()))+" Degrees Celsius";
 	    j3.setText(s);
 	}
     }
