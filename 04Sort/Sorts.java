@@ -63,13 +63,20 @@ public class Sorts{
 	int[] yo = new int[] {64, 25, 12, 22, 11};
 	int[] bo = new int[] {32, 456, 34, 81, 13, 123};
 	int[] bub = new int[] {123, 1234, 12347, 1231, 301, 54, 15, 96};
+	int[] nope = new int[0];
 	selectionSort(yo);
 	System.out.println(Arrays.toString(yo));
 	insertionSort(bo);
 	System.out.println(Arrays.toString(bo));
 	bubbleSort(bub);
 	System.out.println(Arrays.toString(bub));
-
+	selectionSort(nope);
+       	System.out.println(Arrays.toString(nope));
+	insertionSort(nope);
+	System.out.println(Arrays.toString(nope));
+	bubbleSort(nope);
+	System.out.println(Arrays.toString(nope));
     }
+
     
 }
